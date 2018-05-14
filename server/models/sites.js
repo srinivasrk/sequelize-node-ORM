@@ -7,7 +7,8 @@ const generatorEnumData = require('./enums/generator_enum_data');
 module.exports = (connection, DataTypes) => {
   const Sites = connection.define('site', {
     site_name:{
-      type : DataTypes.STRING
+      type : DataTypes.STRING,
+      unique: true
     },
     is_active: {
       type: DataTypes.INTEGER,

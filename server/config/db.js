@@ -13,7 +13,7 @@ db.connection = connection;
 db.Channels = require('../models/channels.js')(connection, Sequelize);
 db.Sites = require('../models/sites.js')(connection, Sequelize);
 
-db.Channels.belongsTo(db.Sites);
+
 db.Sites.hasMany(db.Channels);
 
 // `{
@@ -22,16 +22,5 @@ db.Sites.hasMany(db.Channels);
 //     include : [db.Sites.hasMany(db.Channels)]
 //   }]
 // }`;
-
-var options = {
-  include : []
-}
-
-options.include.push({
-  "association" : db.Channels.belongsTo(db.Sites),
-  "include" : [db.Sites.hasMany(db.Channels)]
-});
-
-db.Channels.options = options;
 
 module.exports = db;
