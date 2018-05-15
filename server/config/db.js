@@ -16,6 +16,7 @@ db.Sites = require('../models/sites.js')(connection, Sequelize);
 db.Maintainers = require('../models/maintainers.js')(connection, Sequelize);
 
 db.Sites.hasMany(db.Channels);
-db.Sites.hasMany(db.Maintainers);
+db.Sites.belongsTo(db.Maintainers);
+db.Maintainers.hasMany(db.Sites);
 
 module.exports = db;
