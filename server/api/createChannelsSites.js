@@ -1,12 +1,27 @@
 const db = require('../config/db');
 const channelsData = require('./readCsvChannelsData');
+var uniqueMaintainers = []
 
 module.exports = function post(req,res,next) {
   return new Promise((resolve, reject) => {
+    db.SiteMaintainers.sync({force:true});
     db.Sites.sync({
       force: true
     }).then(() => {
-      db.Maintainers.sync({force:true});
+      db.Maintainers.sync({force:true}).then(() => {
+          for(var site in channelsData){
+            if(channelsData[site]["maintainer"][0])
+            {
+              if(! uniqueMaintainers.includes(channelsData[site]["maintainer"][0].maintainer)){
+                console.log("true");
+                db.Maintainers.create({
+                  maintainer: channelsData[site]["maintainer"][0].maintainer
+                });
+                uniqueMaintainers.push(channelsData[site]["maintainer"][0].maintainer)
+              }
+            }
+          }
+      });
       db.Channels.sync({
         force: true
       }).then(() => {
@@ -16,13 +31,10 @@ module.exports = function post(req,res,next) {
             promises.push(db.Sites.create({
                 site_name: site,
                 channels: channelsData[site]["channels"],
-                maintainers: channelsData[site]["maintainer"],
                 is_active: channelsData[site]["is_active"]
               }, {
                 include: [{
-                  model : db.Maintainers
-                }, {
-                  model: db.Channels
+                  model : db.Channels
                 }
               ],
                 transaction: t

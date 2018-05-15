@@ -43,6 +43,11 @@ module.exports = (connection, DataTypes) => {
     },
     number: DataTypes.INTEGER
   }, {
+    // uniqueKeys : {
+    //   Items_unique: {
+    //     fields: ['site_id', 'measurement', 'units', 'location', 'method', 'generator', 'number' ]
+    //   }
+    // },
     timestamps: false,
     underscored: true
   });

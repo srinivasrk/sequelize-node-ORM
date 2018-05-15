@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 const connection = new Sequelize('null', 'null', 'null', {
   dialect: 'sqlite',
   storage: 'MSDDB.sqlite',
-  logging: false
+  //logging: false
 });
 
 const db = {}
@@ -14,8 +14,11 @@ db.connection = connection;
 db.Channels = require('../models/channels.js')(connection, Sequelize);
 db.Sites = require('../models/sites.js')(connection, Sequelize);
 db.Maintainers = require('../models/maintainers.js')(connection, Sequelize);
+db.SiteMaintainers = require('../models/site_maintainers.js')(connection, Sequelize);
+
+
 
 db.Sites.hasMany(db.Channels);
-db.Sites.hasMany(db.Maintainers);
+db.Sites.belongsToMany(db.Maintainers, {through : db.SiteMaintainers });
 
 module.exports = db;
