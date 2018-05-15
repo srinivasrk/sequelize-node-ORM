@@ -49,6 +49,6 @@ csvActiveSitesData.forEach((element) => {
   }
 })
 
-console.log(rowChannelData);
+// console.log(rowChannelData);
 
 module.exports = rowChannelData;

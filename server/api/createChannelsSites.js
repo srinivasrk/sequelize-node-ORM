@@ -14,18 +14,42 @@ module.exports = function post(req,res,next) {
       db.Channels.sync({
         force: true
       }).then(() => {
-        for(var site in channelsData){
-          db.Sites.create({
-            site_name: site,
-            channels: channelsData[site]["channels"],
-            maintainer: channelsData[site]["maintainer"][0],
-            is_active: channelsData[site]["is_active"]
-          }, {
-            include: [db.Channels]
-          })
-        }
+        var promises = [];
+        return db.connection.transaction().then(function(t) {
+          for(var site in channelsData){
+            promises.push(db.Sites.create({
+                site_name: site,
+                channels: channelsData[site]["channels"],
+                maintainer: channelsData[site]["maintainer"][0],
+                is_active: channelsData[site]["is_active"]
+              }, {
+                include: [db.Channels],
+                transaction: t
+              }));
+          }
+          Promise.all(promises)
+            .then(() => {
+              t.commit()
+              console.log("DONE")
+              resolve("Completed");
+            })
+
+        })
+
+
+        // for(var site in channelsData){
+        //   db.Sites.create({
+        //     site_name: site,
+        //     channels: channelsData[site]["channels"],
+        //     maintainer: channelsData[site]["maintainer"][0],
+        //     is_active: channelsData[site]["is_active"]
+        //   }, {
+        //     include: [db.Channels]
+        //   })
+        // }
     });
   });
+
 })
 
 }

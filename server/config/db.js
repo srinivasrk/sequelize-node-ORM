@@ -2,7 +2,8 @@ const Sequelize = require('sequelize');
 // the 3 nulls are IP user-name and password. Since this is sqlite those parameters are unset
 const connection = new Sequelize('null', 'null', 'null', {
   dialect: 'sqlite',
-  storage: 'MSDDB.sqlite'
+  storage: 'MSDDB.sqlite',
+  logging: false
 });
 
 const db = {}
