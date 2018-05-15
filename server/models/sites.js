@@ -10,9 +10,6 @@ module.exports = (connection, DataTypes) => {
       type : DataTypes.STRING,
       unique: true
     },
-    maintainer:{
-      type: DataTypes.STRING
-    },
     is_active: {
       type: DataTypes.INTEGER,
       defaultValue: 0

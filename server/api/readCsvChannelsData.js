@@ -29,7 +29,7 @@ csvChannelsData.forEach((element) => {
 
 csvActiveSitesData.forEach((element) => {
   if(rowChannelData[element.Site_ID.trim()]){
-    rowChannelData[(element.Site_ID.trim())].maintainer.push(element.MaintenanceAssignedto);
+    rowChannelData[(element.Site_ID.trim())].maintainer.push({"maintainer" : element.MaintenanceAssignedto});
     if(element["Currentstatename"].substring(1,2) != "11" ){
       rowChannelData[(element.Site_ID.trim())]["is_active"] = 1
     } else {
@@ -40,7 +40,7 @@ csvActiveSitesData.forEach((element) => {
       channels: [],
       maintainer: []
     };
-    rowChannelData[(element.Site_ID.trim())].maintainer.push(element.MaintenanceAssignedto);
+    rowChannelData[(element.Site_ID.trim())].maintainer.push({"maintainer" : element.MaintenanceAssignedto});
     if(element["Currentstatename"].substring(1,2) != "11" ){
       rowChannelData[(element.Site_ID.trim())]["is_active"] = 1
     } else {

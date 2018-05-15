@@ -30,9 +30,9 @@ module.exports = (connection, DataTypes) => {
     method: {
       type: DataTypes.ENUM,
       values: methodEnumData,
-      // validate: {
-      //   isIn: [methodEnumData]
-      // }
+      validate: {
+        isIn: [methodEnumData]
+      }
     },
     generator: {
       type: DataTypes.ENUM,
