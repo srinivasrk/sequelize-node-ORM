@@ -9,23 +9,23 @@ module.exports = (connection, DataTypes) => {
     measurement: {
       type: DataTypes.ENUM,
       values: valuesEnumData,
-      // validate: {
-      //   isIn: [valuesEnumData]
-      // }
+      validate: {
+        isIn: [valuesEnumData]
+      }
     },
     units: {
       type: DataTypes.ENUM,
       values: unitsEnumData,
-      // validate: {
-      //   isIn: [unitsEnumData]
-      // }
+      validate: {
+        isIn: [unitsEnumData]
+      }
     },
     location: {
       type: DataTypes.ENUM,
       values: locationEnumData,
-      // validate: {
-      //   isIn: [locationEnumData]
-      // }
+      validate: {
+        isIn: [locationEnumData]
+      }
     },
     method: {
       type: DataTypes.ENUM,
@@ -37,9 +37,9 @@ module.exports = (connection, DataTypes) => {
     generator: {
       type: DataTypes.ENUM,
       values: generatorEnumData,
-      // validate: {
-      //   isIn: [generatorEnumData]
-      // }
+      validate: {
+        isIn: [generatorEnumData]
+      }
     },
     number: DataTypes.INTEGER
   }, {

@@ -1,7 +1,6 @@
 var Channels = require('../models/channels.js');
 const csv = require('convert-csv-to-json');
 const csvFilePath = 'channels.csv';
-//let csvChannelsData = csv.fieldDelimiter(',').getJsonFromCsv(csvFilePath);
 var channelsRowData = [];
 const db = require('../config/db');
 const channelsData = require('./readChannelsData');
@@ -15,11 +14,12 @@ module.exports = function post(req,res,next) {
       db.Channels.sync({
         force: true
       }).then(() => {
-        console.log(channelsData["TC-TM-028"]["channels"])
         for(var site in channelsData){
           db.Sites.create({
             site_name: site,
-            channels: channelsData[site]["channels"]
+            channels: channelsData[site]["channels"],
+            maintainer: channelsData[site]["maintainer"][0],
+            is_active: channelsData[site]["is_active"]
           }, {
             include: [db.Channels]
           })
