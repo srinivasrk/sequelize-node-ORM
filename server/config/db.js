@@ -19,6 +19,7 @@ db.SiteMaintainers = require('../models/site_maintainers.js')(connection, Sequel
 
 
 db.Sites.hasMany(db.Channels);
-db.Sites.belongsToMany(db.Maintainers, {through : db.SiteMaintainers });
+db.Sites.belongsTo(db.Maintainers);
+db.Maintainers.hasMany(db.Sites);
 
 module.exports = db;
