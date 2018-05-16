@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 const connection = new Sequelize('null', 'null', 'null', {
   dialect: 'sqlite',
   storage: 'MSDDB.sqlite',
-  logging: false
+  //logging: false
 });
 
 const db = {}

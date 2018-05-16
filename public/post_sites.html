@@ -15,7 +15,7 @@
 <body>
   <h2 id="h2"> upload your csv data</h2>
 
-  <form action="/file-upload" class="dropzone" id="site-upload">
+  <form action="/sites-file-upload" class="dropzone" id="site-upload">
     <div class="fallback">
       <input name="sites_data" type="file" />
     </div>
@@ -24,11 +24,13 @@
   <script>
   Dropzone.options.siteUpload = {
     maxFiles: 1,
+    acceptedFiles: 'text/csv, application/vnd.ms-excel,application/excel, application/xls',
      accept: function(file, done) {
        console.log("uploaded");
        done();
      },
      init: function() {
+
        this.on("maxfilesexceeded", function(file){
            alert("Upload only one file please!");
        });

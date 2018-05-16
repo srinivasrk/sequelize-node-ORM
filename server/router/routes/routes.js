@@ -3,9 +3,19 @@
 module.exports = (app, db) => {
 
 
-  app.post('/file-upload', (req, res) => {
-    console.log(req.files.file.name);
-    res.end();
+  app.post('/sites-file-upload', (req, res) => {
+    if(! req.files)
+      return res.status(400).send("No files were uplaoded");
+
+    let inputFile  = req.files.file;
+
+    inputFile.mv(`imports/my_upload.csv`, function(err) {
+      if(err){
+        console.log(err);
+        return res.status(500).send(err)
+      }
+      res.send('File uploaded');
+    });
   });
 
   app.get('/sites', (req, res) => {
