@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Post Sites CSV
+    </title>
+    <link rel="./dist/dropzone.css" / />
+    <script src="./dist/dropzone.js"></script>
+</head>
+<body>
+  <h2 id="h2"> upload your csv data</h2>
+
+  <form action="/file-upload" class="dropzone">
+    <div class="fallback">
+      <input name="file" type="file" multiple />
+    </div>
+  </form>
+
+  <script>
+    document.getElementById("h2").style.color = "blue"
+  </script>
+</body>
+</html>

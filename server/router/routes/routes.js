@@ -2,8 +2,14 @@
 
 module.exports = (app, db) => {
 
-  app.get('/',(req, res)=> {
-    console.log("welcome to sequelize APIs");
+  app.get('/file-upload', (req, res) => {
+    console.log("woot")
+    res.end();
+  });
+
+  app.post('/file-upload', (req, res) => {
+    console.log("woot")
+    res.end();
   });
 
   app.get('/sites', (req, res) => {
@@ -19,7 +25,7 @@ module.exports = (app, db) => {
         {
           site_name : site.site_name,
           is_active: site.is_active,
-          maintainer: site.maintainer.maintainer
+          maintainer: site.maintainer
         })
       });
       res.json(resObj);
@@ -44,7 +50,8 @@ module.exports = (app, db) => {
       })
       res.json(resObj);
     })
-
   });
+
+
 
 };
