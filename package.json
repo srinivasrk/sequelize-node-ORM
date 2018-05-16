@@ -4,22 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "node ./server/index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.18.2",
+    "body-parser": "1.15.2",
+    "express": "4.14.0",
+    "morgan": "1.7.0",
+    "pg": "6.1.0",
+    "pg-hstore": "2.3.2",
+    "sequelize-cli": "2.4.0",
     "convert-csv-to-json": "0.0.13",
-    "express": "^4.16.3",
     "lodash": "^4.17.10",
-    "morgan": "^1.9.0",
     "sequelize": "^4.37.7",
     "sqlite3": "^4.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.17.4"
+    "nodemon": "^1.10.4"
   }
 }

@@ -14,7 +14,7 @@ db.connection = connection;
 db.Channels = require('../models/channels.js')(connection, Sequelize);
 db.Sites = require('../models/sites.js')(connection, Sequelize);
 db.Maintainers = require('../models/maintainers.js')(connection, Sequelize);
-db.SiteMaintainers = require('../models/site_maintainers.js')(connection, Sequelize);
+
 
 
 
