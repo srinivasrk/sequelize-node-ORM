@@ -19,7 +19,6 @@ var getUniqueMaintainers = function(channelsData) {
 
 module.exports = function post(req,res,next) {
   return new Promise((resolve, reject) => {
-    db.SiteMaintainers.sync({force:true});
     db.Sites.sync({
       force: true
     }).then(() => {
@@ -28,7 +27,6 @@ module.exports = function post(req,res,next) {
             if(channelsData[site]["maintainer"][0])
             {
               if(! uniqueMaintainers.includes(channelsData[site]["maintainer"][0].maintainer)){
-                console.log("true");
                 db.Maintainers.create({
                   maintainer: channelsData[site]["maintainer"][0].maintainer
                 });

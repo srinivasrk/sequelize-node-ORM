@@ -12,14 +12,15 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "1.15.2",
+    "convert-csv-to-json": "0.0.13",
     "express": "4.14.0",
+    "express-fileupload": "^0.4.0",
+    "lodash": "^4.17.10",
     "morgan": "1.7.0",
     "pg": "6.1.0",
     "pg-hstore": "2.3.2",
-    "sequelize-cli": "2.4.0",
-    "convert-csv-to-json": "0.0.13",
-    "lodash": "^4.17.10",
     "sequelize": "^4.37.7",
+    "sequelize-cli": "2.4.0",
     "sqlite3": "^4.0.0"
   },
   "devDependencies": {

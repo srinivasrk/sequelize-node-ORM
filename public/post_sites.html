@@ -4,20 +4,36 @@
     <title>
         Post Sites CSV
     </title>
-    <link rel="./dist/dropzone.css" / />
+    <link rel="stylesheet"  href="./dist/dropzone.css" / />
     <script src="./dist/dropzone.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
 </head>
 <body>
   <h2 id="h2"> upload your csv data</h2>
 
-  <form action="/file-upload" class="dropzone">
+  <form action="/file-upload" class="dropzone" id="site-upload">
     <div class="fallback">
-      <input name="file" type="file" multiple />
+      <input name="sites_data" type="file" />
     </div>
   </form>
 
   <script>
-    document.getElementById("h2").style.color = "blue"
+  Dropzone.options.siteUpload = {
+    maxFiles: 1,
+     accept: function(file, done) {
+       console.log("uploaded");
+       done();
+     },
+     init: function() {
+       this.on("maxfilesexceeded", function(file){
+           alert("Upload only one file please!");
+       });
+     }
+  };
   </script>
 </body>
 </html>

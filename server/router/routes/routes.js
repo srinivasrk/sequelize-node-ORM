@@ -2,13 +2,9 @@
 
 module.exports = (app, db) => {
 
-  app.get('/file-upload', (req, res) => {
-    console.log("woot")
-    res.end();
-  });
 
   app.post('/file-upload', (req, res) => {
-    console.log("woot")
+    console.log(req.files.file.name);
     res.end();
   });
 
