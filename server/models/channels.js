@@ -5,7 +5,7 @@ const methodEnumData = require('./enums/method_enum_data');
 const generatorEnumData = require('./enums/generator_enum_data');
 
 module.exports = (connection, DataTypes) => {
-  const Channels = connection.define('channels', {
+  const Channel = connection.define('channels', {
     measurement: {
       type: DataTypes.ENUM,
       values: valuesEnumData,
@@ -43,14 +43,9 @@ module.exports = (connection, DataTypes) => {
     },
     number: DataTypes.INTEGER
   }, {
-    // uniqueKeys : {
-    //   Items_unique: {
-    //     fields: ['site_id', 'measurement', 'units', 'location', 'method', 'generator', 'number' ]
-    //   }
-    // },
     timestamps: false,
     underscored: true
   });
 
-  return Channels;
+  return Channel;
 };

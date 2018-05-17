@@ -5,19 +5,19 @@ const methodEnumData = require('./enums/method_enum_data');
 const generatorEnumData = require('./enums/generator_enum_data');
 
 module.exports = (connection, DataTypes) => {
-  const Sites = connection.define('site', {
-    site_name:{
+  const Site = connection.define('site', {
+    name:{
       type : DataTypes.STRING,
       unique: true
     },
-    is_active: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   }, {
     timestamps: false,
     underscored: true
   });
 
-  return Sites;
+  return Site;
 };

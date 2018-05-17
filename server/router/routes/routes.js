@@ -1,5 +1,5 @@
 'use strict';
-const createChannelsSites = require('./api/createChannelsSites');
+const createChannelsSites = require('../../api/createChannelsSites');
 
 module.exports = (app, db) => {
   app.post('/sites-file-upload', (req, res) => {
@@ -18,19 +18,20 @@ module.exports = (app, db) => {
   });
 
   app.get('/sites', (req, res) => {
-    db.Sites.findAll({
+    db.Site.findAll({
       include: [
         {
-          model: db.Maintainers
+          model: db.Maintainer,
+          as: 'maintainer'
         }
       ]
     }).then(sites => {
       const resObj = sites.map(site => {
         return Object.assign({},
         {
-          site_name : site.site_name,
-          is_active: site.is_active,
-          maintainer: site.maintainer
+          site_name : site.name,
+          active: site.active,
+          maintainer: site.maintainer?site.maintainer.name: "NA"
         })
       });
       res.json(resObj);
@@ -38,17 +39,17 @@ module.exports = (app, db) => {
   });
 
   app.get('/channels', (req, res) => {
-    db.Sites.findAll({include: [db.Channels]}).then(sites => {
+    db.Site.findAll({include:[{model: db.Channel, as:'channels'}]}).then(sites => {
       const resObj = sites.map(site => {
-        return Object.assign({},
-        {
-          site_name: site.site_name,
-          is_active: site.is_active,
-          channel_list: site.channels
+        return({
+          site_name : site.name,
+          active: site.active,
+          channels: site.channels
         })
       })
       res.json(resObj);
-    })
+    });
+
   });
 
 
@@ -57,6 +58,10 @@ module.exports = (app, db) => {
     .then(() => createChannelsSites.updateChannels())
     .then(() => {
       console.log("FINISHED CHANNELS PROMISE")
+      res.end();
+    }).catch((err) => {
+      console.log(err);
+      res.end();
     });
   })
 

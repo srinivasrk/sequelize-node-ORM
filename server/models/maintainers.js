@@ -1,6 +1,6 @@
 module.exports = (connection, DataTypes) => {
-  const Maintainers = connection.define('maintainers', {
-    maintainer:{
+  const Maintainer = connection.define('maintainers', {
+    name:{
       type: DataTypes.STRING,
       unique: true
     },
@@ -8,5 +8,5 @@ module.exports = (connection, DataTypes) => {
     timestamps: false,
     underscored: true
   });
-  return Maintainers;
+  return Maintainer;
 };

@@ -11,15 +11,17 @@ const db = {}
 db.Sequelize = Sequelize;
 db.connection = connection;
 
-db.Channels = require('../models/channels.js')(connection, Sequelize);
-db.Sites = require('../models/sites.js')(connection, Sequelize);
-db.Maintainers = require('../models/maintainers.js')(connection, Sequelize);
+db.Channel = require('../models/channels.js')(connection, Sequelize);
+db.Site = require('../models/sites.js')(connection, Sequelize);
+db.Maintainer = require('../models/maintainers.js')(connection, Sequelize);
 
 
+// sites <-->> channels
+db.Site.Channels = db.Site.hasMany(db.Channel, {as: 'channels'});
+db.Channel.Site = db.Channel.belongsTo(db.Site, {as: 'site'});
 
-
-db.Sites.hasMany(db.Channels);
-db.Sites.belongsTo(db.Maintainers);
-db.Maintainers.hasMany(db.Sites);
+// sites <<--> maintainers
+db.Maintainer.Sites = db.Maintainer.hasMany(db.Site, {as: 'sites'});
+db.Site.Maintainer = db.Site.belongsTo(db.Maintainer, {as: 'maintainer'});
 
 module.exports = db;
