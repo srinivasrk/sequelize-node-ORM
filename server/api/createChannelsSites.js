@@ -1,5 +1,4 @@
 const db = require('../config/db');
-
 var _ = require('underscore');
 const csvparse = require('csv-parse');
 var fs = require('fs-extra');

@@ -1,8 +1,7 @@
 'use strict';
+const createChannelsSites = require('./api/createChannelsSites');
 
 module.exports = (app, db) => {
-
-
   app.post('/sites-file-upload', (req, res) => {
     if(! req.files)
       return res.status(400).send("No files were uplaoded");
@@ -39,13 +38,7 @@ module.exports = (app, db) => {
   });
 
   app.get('/channels', (req, res) => {
-    db.Sites.findAll({
-      include: [
-        {
-          model: db.Channels
-        }
-      ]
-    }).then(sites => {
+    db.Sites.findAll({include: [db.Channels]}).then(sites => {
       const resObj = sites.map(site => {
         return Object.assign({},
         {
@@ -59,5 +52,12 @@ module.exports = (app, db) => {
   });
 
 
+  app.get('/create-channles-sites', (req, res) => {
+    createChannelsSites.updateSites()
+    .then(() => createChannelsSites.updateChannels())
+    .then(() => {
+      console.log("FINISHED CHANNELS PROMISE")
+    });
+  })
 
 };
